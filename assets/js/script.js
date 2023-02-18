@@ -27,6 +27,9 @@ function runGame(gameType) {
 
     if (gameType === "addition") {
         displayAdditionalQuestion(num1, num2);
+    } else if (gameType === "multiply") {
+        displayAdditionalQuestion(num1, num2);
+        document.getElementById('operator').textContent = '*';
     } else {
         alert(`Unknown game type:${gameType}`);
         throw `Unknown game type:${gameType}. Aborting!`;
@@ -66,6 +69,8 @@ function calculateCorrectAnswer() {
 
     if(operator === "+"){
         return [operand1 + operand2, "addition"]
+    } else if (operator === "*"){
+        return [operand1 * operand2, "multiply"]
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting`
@@ -79,6 +84,9 @@ function incrementScore() {
     correct.innerHTML++;
 }
 
+/**
+ * Gets current tally of incorrect answers from the DOM and increemts ot by one
+ */
 function incrementWrongAnswer() {
     let incorrect = document.getElementById('incorrect');
     incorrect.innerHTML++;
