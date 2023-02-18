@@ -30,10 +30,18 @@ function runGame(gameType) {
     } else if (gameType === "multiply") {
         displayAdditionalQuestion(num1, num2);
         document.getElementById('operator').textContent = '*';
+    } else if (gameType === "subtract") {
+        if(num1>num2){
+            displayAdditionalQuestion(num1, num2);
+            document.getElementById('operator').textContent = '-';
+        } else {
+            displayAdditionalQuestion(num2, num1);
+            document.getElementById('operator').textContent = '-';
+        }
     } else {
-        alert(`Unknown game type:${gameType}`);
-        throw `Unknown game type:${gameType}. Aborting!`;
-    }
+        displayAdditionalQuestion(num1*num2, num2);
+        document.getElementById('operator').textContent = '/';
+    } 
 }
 
 
@@ -67,13 +75,14 @@ function calculateCorrectAnswer() {
     let operand2 = parseInt(document.getElementById('operand2').innerText);
     let operator = document.getElementById('operator').innerText;
 
-    if(operator === "+"){
+    if(operator === "+") {
         return [operand1 + operand2, "addition"]
-    } else if (operator === "*"){
+    } else if (operator === "*") {
         return [operand1 * operand2, "multiply"]
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"]
     } else {
-        alert(`Unimplemented operator ${operator}`);
-        throw `Unimplemented operator ${operator}. Aborting`
+        return [operand1 / operand2, "division"]
     }
 }
 /**
@@ -99,7 +108,11 @@ function displayAdditionalQuestion(operand1, operand2) {
 }
 
 function displaySubtractQuestion() {
-
+/* document.getElementById('operand1').textContent = operand1>operand2 : operand1 : operand2
+  if operand one is larger than operand2 return(:) operand1 operand2
+  document.getElementById('operand1').textContent = operand1>operand2 : operand2 : operand1
+  if operand one is larger than operand2 return(:) operand2 operand1
+  */
 }
 
 function displayMultiplyQuestion() {
